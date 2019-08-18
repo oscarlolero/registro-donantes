@@ -1,0 +1,1 @@
+exports.databaseUrl = 'https://donantes-sangre.firebaseio.com/';
