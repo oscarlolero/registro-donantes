@@ -7,8 +7,22 @@ admin.initializeApp({
 });
 const db = admin.firestore();
 
+//CONFIG DATES
+// db.doc('dates/20septiembre').collection('8:00').doc('additionalInfo').set({additionalInfo: ''});
+// db.doc('dates/20septiembre').collection('8:20').doc('additionalInfo').set({additionalInfo: ''});
+// db.doc('dates/20septiembre').collection('8:40').doc('additionalInfo').set({additionalInfo: ''});
+// db.doc('dates/20septiembre').collection('9:00').doc('additionalInfo').set({additionalInfo: ''});
+// db.doc('dates/20septiembre').collection('9:20').doc('additionalInfo').set({additionalInfo: ''});
+// db.doc('dates/20septiembre').collection('9:40').doc('additionalInfo').set({additionalInfo: ''});
+// db.doc('dates/20septiembre').collection('10:00').doc('additionalInfo').set({additionalInfo: ''});
+// db.doc('dates/20septiembre').collection('10:20').doc('additionalInfo').set({additionalInfo: ''});
+// db.doc('dates/20septiembre').collection('10:40').doc('additionalInfo').set({additionalInfo: ''});
+// db.doc('dates/20septiembre').collection('11:00').doc('additionalInfo').set({additionalInfo: ''});
+// db.doc('dates/20septiembre').collection('11:20').doc('additionalInfo').set({additionalInfo: ''});
+// db.doc('dates/20septiembre').collection('11:40').doc('additionalInfo').set({additionalInfo: ''});
+
 module.exports = (app, passport) => {
-    let usersCollection = db.collection('users');
+    const usersCollection = db.collection('users');
     app.post('/register', (req, res) => {
         try {
             usersCollection.doc(req.body.nua).set({
@@ -17,6 +31,8 @@ module.exports = (app, passport) => {
                 email: req.body.email,
                 password: req.body.password
             }).then(() => {
+                const date = db.doc(`dates/${req.body.date}`).collection(${req.body.time}).doc(req.body.nua).set({additionalInfo: ''});
+
                 console.log('User registered.');
                 res.send('Registered')
             }).catch(error => {
