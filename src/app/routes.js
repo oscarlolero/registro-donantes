@@ -1,76 +1,33 @@
 const axios = require('axios');
+const admin = require("firebase-admin");
+const serviceAccount = require("../config/firebase-key.json");
 
-// const admin = require("firebase-admin");
-//
-// const serviceAccount = require("../config/firebase-key.json");
-//
-// admin.initializeApp({
-//     credential: admin.credential.cert(serviceAccount),
-//     databaseURL: "https://donantes-sangre.firebaseio.com"
-// });
-//
-// const db = admin.database();
-// const usersRef = db.ref('users/');
+admin.initializeApp({
+    credential: admin.credential.cert(serviceAccount),
+});
+const db = admin.firestore();
 
 module.exports = (app, passport) => {
-
+    let usersCollection = db.collection('users');
     app.post('/register', async (req, res) => {
         try {
-            await axios.put(`https://donantes-sangre.firebaseio.com/users/${req.body.nua}.json`, {
-                nua: req.body.nua,
+            usersCollection.doc(req.body.nua).set({
                 first_name: req.body.first_name,
                 last_name: req.body.last_name,
                 email: req.body.email,
                 password: req.body.password
+            }).then(() => {
+                console.log('User registered.');
+                res.send('Registered')
+            }).catch((error) => {
+                console.error('Error while registering user:', error);
             });
-        } catch (e) {
-            res.send(e)
+        } catch (error) {
+            console.error('Error while registering user:', error);
         }
-    });
 
-    // app.post('/register', async (req, res) => {
-    //     usersRef.child('oscarlolero').set({
-    //         nua: req.body.nua,
-    //         first_name: req.body.first_name,
-    //         last_name: req.body.last_name,
-    //         email: req.body.email,
-    //         password: req.body.password
-    //     }).then(() => {
-    //         res.send('done');
-    //         console.log("added");
-    //     });
-
-    // try {
-    //     await axios.put(`https://flutter-products-3e91e.firebaseio.com/users/${req.body.username}.json`, {
-    //         username: req.body.username,
-    //         password: req.body.password,
-    //         isAdmin: false,
-    //         bill: {
-    //             adress: '',
-    //             city: '',
-    //             cp: '',
-    //             email: '',
-    //             first_name: '',
-    //             last_name: '',
-    //             phone: '',
-    //             rfc: ''
-    //         }
-    //     });
-    // } catch (e) {
-    //     res.redirect('/login?mode=registerFAILED');
-    // }
-//     res.redirect('/login');
-// }
-// )
-// ;
-app.post('/login', (req, res) => {
-    usersRef.has({
-        nua: req.body.nua,
-        first_name: req.body.first_name,
-        last_name: req.body.last_name,
-        email: req.body.email,
-        password: req.body.password
     });
-});
-}
-;
+    app.post('/login', (req, res) => {
+
+    });
+};
