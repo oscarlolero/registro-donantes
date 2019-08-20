@@ -8,6 +8,12 @@ admin.initializeApp({
 const db = admin.firestore();
 
 //CONFIG DATES
+// db.doc('dates/20septiembre').set({
+//    availableHours: ['8:00 a.m.', '8:20 a.m.', '8:40 a.m.', '9:00 a.m.', '9:20 a.m.', '9:40 a.m.',
+//        '10:00 a.m.', '10:20 a.m.', '10:40 a.m.',
+//        '11:00 a.m.', '11:20 a.m.', '11:40 a.m.'],
+//     name: '20 de septiembre'
+// });
 // db.doc('dates/20septiembre').collection('8:00').doc('additionalInfo').set({additionalInfo: ''});
 // db.doc('dates/20septiembre').collection('8:20').doc('additionalInfo').set({additionalInfo: ''});
 // db.doc('dates/20septiembre').collection('8:40').doc('additionalInfo').set({additionalInfo: ''});
@@ -39,10 +45,12 @@ module.exports = (app, passport) => {
                     return snap.size;
                 });
             }).then((size) => {
+                const dateRef = db.doc(`/dates/${req.body.date}`);
                 if (size >= 7) {
-                    return Promise.reject('There are no more beds available for this hour.');
+                    return Promise.reject('There are not more beds available for this hour.');
                 }
-                db.doc(`dates/${req.body.date}`).collection(req.body.time).doc(req.body.nua).set({additionalInfo: ''});
+                dateRef.collection(req.body.time).doc(req.body.nua).set({additionalInfo: ''});
+                //Implementar la actualización de availableHours
                 userDoc.set({
                     first_name: req.body.first_name,
                     last_name: req.body.last_name,
@@ -79,26 +87,15 @@ module.exports = (app, passport) => {
     app.get('/days', (req, res) => {
         db.collection('dates').get().then(snap => {
             const datesList = snap.docs.map(doc => {
-                return doc.id;
+                return doc.data().name;
             });
             res.json(datesList);
         });
     });
 
     app.post('/hours', (req, res) => {
-        db.doc(`dates/${req.body.day}`).listCollections().then(collections => {
-            let hoursList = [];
-            for (let collection of collections) {
-                db.collection(`dates/${req.body.day}/${collection.id}`).get().then(snap => {
-                    if(snap.size <= 6) {
-                        hoursList.push(collection.id);
-                    }
-                    //return `Lugares ocupados en ${collection.id}: ${snap.size}`;
-                }).then(msg => {
-                 //   console.log(hoursList)
-                });
-
-            }
+        db.doc(`dates/${req.body.day}`).get().then(hoursList => {
+            res.json(hoursList.data().availableHours);
         });
     });
 };
