@@ -48,14 +48,33 @@ module.exports = (app, passport) => {
                 const dateRef = db.doc(`/dates/${req.body.date}`);
                 if (size >= 7) {
                     return Promise.reject('There are not more beds available for this hour.');
+                } else if (size === 6) {
+                    //En caso de llenarse las 6 camas, remover el horario de la lista
+                    dateRef.get().then(res => {
+                        return res.data().availableHours.filter(value => {
+                            return value !== req.body.time;
+                        });
+
+                    }).then(newHoursList => {
+                        dateRef.update({
+                            availableHours: newHoursList
+                        }).catch(error => {
+                            console.error('Failed to update availableHours', error);
+                        });
+                    });
                 }
-                dateRef.collection(req.body.time).doc(req.body.nua).set({additionalInfo: ''});
-                //Implementar la actualización de availableHours
+                dateRef.collection(req.body.time).doc(req.body.nua).set({additionalInfo: ''}).catch(error => {
+                    console.error('Failed to update hour collection', error);
+                });
                 userDoc.set({
                     first_name: req.body.first_name,
                     last_name: req.body.last_name,
                     email: req.body.email,
-                    password: req.body.password
+                    date: req.body.date,
+                    hour: req.body.time,
+                    career: req.body.career
+                }).catch(error => {
+                    console.error('Failed to update hour collection', error);
                 });
             }).then(() => {
                 console.log('User registered.');
