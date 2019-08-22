@@ -33,7 +33,7 @@
         <option value="0">Seleccione un día...</option>
         <% var count = 0;
         Object.keys(dates).forEach(function (key, index) { %>
-            <option value="<%= index + 1 %>"><%= key %></option>
+            <option value="<%= key %>"><%= key %></option>
         <% count++; }) %>
     </select>
     <select name="hour" class="hour" style="visibility:hidden;" disabled>
@@ -47,11 +47,11 @@
     const daySelect = document.getElementsByClassName('day')[0];
     const hourSelect = document.getElementsByClassName('hour')[0];
     daySelect.addEventListener("change", async () => {
-        if(parseInt(daySelect.value) !== 0) {
+        if(daySelect.value !== '0') {
             hourSelect.style.visibility = "visible";
             const response = await axios.get(`${window.origin}/hours`);
             hourSelect.innerHTML = '<option value="0">Seleccione un horario...</option>';
-            Object.entries(response.data)[daySelect.value - 1][1].forEach(hour => {
+            Object.entries(response.data)[daySelect.selectedIndex - 1][1].forEach(hour => {
                 hourSelect.insertAdjacentHTML('beforeend', `<option value="${hour}">${hour}</option>`)
             });
             hourSelect.disabled = false;
