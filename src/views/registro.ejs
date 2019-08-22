@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Registro</title>
+    <style>
+        .register-form * {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+<form class="register-form" action="/register" method="POST">
+    <input type="number" name="nua" placeholder="NUA" autocomplete="off" autofocus>
+    <input type="text" name="first_name" placeholder="Nombre" autocomplete="off" autofocus>
+    <input type="text" name="last_name" placeholder="Apellido" autocomplete="off" autofocus>
+    <!--        <input type="email" name="email" placeholder="E-mail" autocomplete="off" autofocus>-->
+    <input type="text" name="email" placeholder="E-mail" autocomplete="off" autofocus>
+    <select name="career">
+        <option value="0">Artes digitales</option>
+        <option value="1">Ingeniería en comunicaciones y electrónica</option>
+        <option value="2">Ingeniería eléctrica</option>
+        <option value="3">Gestión empresarial</option>
+        <option value="4">Ingeniería en mecatrónica</option>
+        <option value="5">Ingeniería en sistemas computacionales</option>
+        <option value="6">Doctorado/Maestría</option>
+        <option value="7">Otro</option>
+    </select>
+    <select name="day" class="day" id="day">
+        <option value="0">Seleccione un día...</option>
+        <% var count = 0;
+        Object.keys(dates).forEach(function (key) { %>
+            <option value="<%= key %>"><%= key %></option>
+        <% count++; }) %>
+    </select>
+    <select name="hour" class="hour" style="visibility:hidden;">
+        <option value="0">Seleccione un horario...</option>
+    </select>
+
+    <button>Registrar</button>
+</form>
+</body>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+    axios = window.axios;
+    document.getElementsByClassName('day')[0].addEventListener("click", async () => {
+        const response = await axios.get(`${window.origin}/hours`);
+        console.log(response);
+    });
+</script>
+</html>
