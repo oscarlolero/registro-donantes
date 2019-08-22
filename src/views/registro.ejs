@@ -32,23 +32,33 @@
     <select name="day" class="day" id="day">
         <option value="0">Seleccione un día...</option>
         <% var count = 0;
-        Object.keys(dates).forEach(function (key) { %>
-            <option value="<%= key %>"><%= key %></option>
+        Object.keys(dates).forEach(function (key, index) { %>
+            <option value="<%= index + 1 %>"><%= key %></option>
         <% count++; }) %>
     </select>
-    <select name="hour" class="hour" style="visibility:hidden;">
-        <option value="0">Seleccione un horario...</option>
+    <select name="hour" class="hour" style="visibility:hidden;" disabled>
     </select>
-
     <button>Registrar</button>
 </form>
 </body>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script>
     axios = window.axios;
-    document.getElementsByClassName('day')[0].addEventListener("click", async () => {
-        const response = await axios.get(`${window.origin}/hours`);
-        console.log(response);
+    const daySelect = document.getElementsByClassName('day')[0];
+    const hourSelect = document.getElementsByClassName('hour')[0];
+    daySelect.addEventListener("change", async () => {
+        if(parseInt(daySelect.value) !== 0) {
+            hourSelect.style.visibility = "visible";
+            const response = await axios.get(`${window.origin}/hours`);
+            hourSelect.innerHTML = '<option value="0">Seleccione un horario...</option>';
+            Object.entries(response.data)[daySelect.value - 1][1].forEach(hour => {
+                hourSelect.insertAdjacentHTML('beforeend', `<option value="${hour}">${hour}</option>`)
+            });
+            hourSelect.disabled = false;
+        } else {
+            hourSelect.style.visibility = "hidden";
+            hourSelect.disabled = true;
+        }
     });
 </script>
 </html>
