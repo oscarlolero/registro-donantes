@@ -62,6 +62,7 @@ module.exports = (app) => {
             }
             //Registrar el NUA en la colección de su horario
             db.doc(`dates/${day}`).collection(req.body.hour).doc(req.body.nua).set({additionalInfo: ''});
+            let ip = req.header('x-forwarded-for') || req.connection.remoteAddress;
             await userDoc.set({
                 first_name: req.body.first_name,
                 last_name: req.body.last_name,
@@ -69,7 +70,7 @@ module.exports = (app) => {
                 date: day,
                 hour: req.body.hour,
                 career: req.body.career,
-                ip: req.ip,
+                ip: ip,
                 assist: false
             });
         } catch (e) {
