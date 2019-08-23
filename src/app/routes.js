@@ -43,7 +43,8 @@ module.exports = (app) => {
         });
     });
     app.get('/registrado', async (req, res) => {
-        const userData = await db.doc(`users/${req.flash('NUA')}`).get();
+        console.log(typeof req.flash('registerMsg'), req.flash('registerMsg'));
+        const userData = await db.doc(`users/${req.flash('registerMsg')}`).get();
         res.render('registrado', {
             data: userData.data()
         });
@@ -93,8 +94,11 @@ module.exports = (app) => {
                 career: req.body.career,
                 assist: false
             });
-            req.flash('NUA', req.body.nua);
+            console.log(typeof  req.body.nua, req.body.nua);
+            req.flash('registerMsg', req.body.nua);
             res.redirect('registrado');
+
+
         } catch (e) {
             req.flash('registerMsg', 'Hubo un error interno con el servidor.');
             res.render('registro', {
