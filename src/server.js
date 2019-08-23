@@ -32,9 +32,9 @@ require('./app/routes')(app);
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Handle 404
-// app.use((req, res) => {
-//     res.redirect('/login');
-// });
+app.use((req, res) => {
+    res.redirect('/registro');
+});
 
 app.listen(app.get('port'), () => {
     console.log('Server encendido en puerto', app.get('port'));

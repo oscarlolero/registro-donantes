@@ -12,8 +12,19 @@
     <ul>
         <li>Hola <%= data.first_name %>, tu cita quedó agendada para el <%= data.date %> a las <%= data.hour %></li>
         <li>Te enviamos un correo a <%= data.email %> con los datos de tu cita y el código QR para la validación de tu donación de sangre</li>
-        <li>Código QR:</li>
+        <li>Código QR (NUA: <span id="NUA"><%= NUA %></span>):</li>
+        <li><div id="qrcode" style="width: 160px; height: 150px; margin-bottom: 10px"></div></li>
         <li>Recuerda: {Agregar recomendaciones para ir a donar sangre xd ir en ayunas, etc}</li>
     </ul>
 </body>
+<script src="js/qrcode.min.js"></script>
+<script>
+    let qrcode = new QRCode('qrcode', {
+        width: 160,
+        height: 160,
+        colorDark : "#000000",
+        colorLight : "#ffffff",
+    });
+    qrcode.makeCode(document.getElementById('NUA').innerHTML);
+</script>
 </html>
