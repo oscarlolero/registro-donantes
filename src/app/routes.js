@@ -37,20 +37,17 @@ module.exports = (app) => {
             if (req.body.nua.length !== 6 || req.body.first_name.length < 3 || req.body.last_name.length < 3
                 || req.body.email < 4 || req.body.hour === 0 || req.body.day === 0 || typeof req.body.hour === 'undefined') {
                 req.flash('registerMsg', 'Verifica que has ingresado todos los datos de manera correcta.');
-                console.log(1);
                 return res.redirect('/registro');
             }
             //Checar si el NUA existe
             data = await userDoc.get();
             if(data.exists) {
-                console.log(7);
                 req.flash('registerMsg', 'Este NUA ya está registrado.');
                 return res.redirect('/registro');
             }
             //Chcar los lugares disponibles
             data = await db.doc(`dates/${day}`).collection(req.body.hour).get();
             if(data.size >= 7) {
-                console.log(2);
                 req.flash('registerMsg', 'Se llenó el horario que escogiste.');
                 return res.redirect('/registro');
             } else if(data.size === 6) {
@@ -75,7 +72,6 @@ module.exports = (app) => {
                 assist: false
             });
         } catch (e) {
-            console.log(4);
             req.flash('registerMsg', 'Hubo un error interno con el servidor.');
             res.redirect('registrado');
             console.error('CATCH:', e);
