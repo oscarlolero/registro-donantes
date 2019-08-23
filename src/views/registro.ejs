@@ -9,32 +9,33 @@
     <style>
         .register-form * {
             display: block;
+            margin-bottom: 10px;
         }
     </style>
 </head>
 <body>
 <form class="register-form" action="/register" method="POST">
-    <input type="number" name="nua" placeholder="NUA" autocomplete="off" autofocus>
-    <input type="text" name="first_name" placeholder="Nombre" autocomplete="off" autofocus>
-    <input type="text" name="last_name" placeholder="Apellido" autocomplete="off" autofocus>
-    <!--        <input type="email" name="email" placeholder="E-mail" autocomplete="off" autofocus>-->
-    <input type="text" name="email" placeholder="E-mail" autocomplete="off" autofocus>
+    <% if( typeof registerMsg != "undefined") { %>
+        <% if(registerMsg.length > 0) { %>
+        <span><%= registerMsg %></span>
+        <% } %>
+    <% } %>
+    <input type="number" name="nua" placeholder="NUA" autocomplete="off" autofocus required>
+    <input type="text" name="first_name" placeholder="Nombre" autocomplete="off" required minlength=3>
+    <input type="text" name="last_name" placeholder="Apellido" autocomplete="off" required minlength=3>
+    <!--        <input type="email" name="email" placeholder="E-mail" autocomplete="off">-->
+    <input type="text" name="email" placeholder="E-mail" autocomplete="off" required minlength=4>
     <select name="career">
-        <option value="0">Artes digitales</option>
-        <option value="1">Ingeniería en comunicaciones y electrónica</option>
-        <option value="2">Ingeniería eléctrica</option>
-        <option value="3">Gestión empresarial</option>
-        <option value="4">Ingeniería en mecatrónica</option>
-        <option value="5">Ingeniería en sistemas computacionales</option>
-        <option value="6">Doctorado/Maestría</option>
-        <option value="7">Otro</option>
+        <option value="Artes digitales">Artes digitales</option>
+        <option value="Ingeniería en comunicaciones y electrónica">Ingeniería en comunicaciones y electrónica</option>
+        <option value="Ingeniería eléctrica">Ingeniería eléctrica</option>
+        <option value="Gestión empresarial">Gestión empresarial</option>
+        <option value="Ingeniería en mecatrónica">Ingeniería en mecatrónica</option>
+        <option value="Ingeniería en sistemas computacionales">Ingeniería en sistemas computacionales</option>
+        <option value="Doctorado/Maestría">Doctorado/Maestría</option>
+        <option value="Otro">Otro</option>
     </select>
     <select name="day" class="day" id="day">
-        <option value="0">Seleccione un día...</option>
-        <% var count = 0;
-        Object.keys(dates).forEach(function (key, index) { %>
-            <option value="<%= key %>"><%= key %></option>
-        <% count++; }) %>
     </select>
     <select name="hour" class="hour" style="visibility:hidden;" disabled>
     </select>
@@ -46,9 +47,21 @@
     axios = window.axios;
     const daySelect = document.getElementsByClassName('day')[0];
     const hourSelect = document.getElementsByClassName('hour')[0];
+    //Load days
+    window.onload = async () => {
+        daySelect.innerHTML = '<option value="0">Cargando días...</option>';
+        const response = await axios.get(`${window.origin}/days`);
+        daySelect.innerHTML = '<option value="0">Seleccione un día...</option>';
+        Object.entries(response.data).forEach(day => {
+            daySelect.insertAdjacentHTML('beforeend', `<option value="${day[0]}">${day[0]}</option>`)
+        });
+    }
+    //Load hours
+
     daySelect.addEventListener("change", async () => {
         if(daySelect.value !== '0') {
             hourSelect.style.visibility = "visible";
+            hourSelect.innerHTML = '<option value="0">Cargando horarios...</option>';
             const response = await axios.get(`${window.origin}/hours`);
             hourSelect.innerHTML = '<option value="0">Seleccione un horario...</option>';
             Object.entries(response.data)[daySelect.selectedIndex - 1][1].forEach(hour => {
