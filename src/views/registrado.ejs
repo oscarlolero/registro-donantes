@@ -5,9 +5,15 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Registrado</title>
 </head>
 <body>
-
+    <h1>¡Te has registrado con éxito!</h1>
+    <ul>
+        <li>Hola <%= data.first_name %>, tu cita quedó agendada para el <%= data.date %> a las <%= data.hour %></li>
+        <li>Te enviamos un correo a <%= data.email %> con los datos de tu cita y el código QR para la validación de tu donación de sangre</li>
+        <li>Código QR:</li>
+        <li>Recuerda: {Agregar recomendaciones para ir a donar sangre xd ir en ayunas, etc}</li>
+    </ul>
 </body>
 </html>

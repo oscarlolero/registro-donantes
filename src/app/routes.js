@@ -43,8 +43,10 @@ module.exports = (app) => {
         });
     });
     app.get('/registrado', async (req, res) => {
-        //req.flash('NUA');
-        res.render('registrado');
+        const userData = await db.doc(`users/${req.flash('NUA')}`).get();
+        res.render('registrado', {
+            data: userData.data()
+        });
     });
 
     //Validaciones y registros
