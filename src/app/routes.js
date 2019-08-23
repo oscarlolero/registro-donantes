@@ -69,6 +69,7 @@ module.exports = (app) => {
                 date: day,
                 hour: req.body.hour,
                 career: req.body.career,
+                ip: req.ip,
                 assist: false
             });
         } catch (e) {
