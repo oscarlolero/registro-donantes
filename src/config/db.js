@@ -1,6 +1,14 @@
+const admin = require("firebase-admin");
+const serviceAccount = require("./firebase-key.json");
+
+admin.initializeApp({
+    credential: admin.credential.cert(serviceAccount),
+});
+const db = admin.firestore();
+exports.db;
 //Crear registros en base de datos
 //CONFIG DATES
-exports.cleanAndPopulateDB = (db) => {
+exports.cleanAndPopulateDB = () => {
     db.collection('dates').doc('availableHours').set({
         '20 de septiembre': ['8:00 a.m.', '8:20 a.m.', '8:40 a.m.',
             '9:00 a.m.', '9:20 a.m.', '9:40 a.m.',

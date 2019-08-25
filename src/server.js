@@ -26,7 +26,7 @@ app.use(session({
 }));
 app.use(flash());
 //Rutas
-require('./app/routes')(app);
+require('./routes/routes')(app);
 
 //Archivos estáticos
 app.use(express.static(path.join(__dirname, 'public')));

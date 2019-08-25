@@ -1,12 +1,7 @@
-const admin = require("firebase-admin");
-const serviceAccount = require("../config/firebase-key.json");
-const config = require('../config/config');
-
-admin.initializeApp({
-    credential: admin.credential.cert(serviceAccount),
-});
-const db = admin.firestore();
+const config = require('../config/sgMail');
+const db = config.db;
 //config.cleanAndPopulateDB(db);
+
 module.exports = (app) => {
     //Páginas
     app.get('/registro', (req, res) => {
