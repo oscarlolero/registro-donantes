@@ -1,7 +1,7 @@
 const dbConfig = require('../config/db');
 const mail = require('../config/mail');
 const db = dbConfig.db;
-// config.cleanAndPopulateDB(db);
+//dbConfig.cleanAndPopulateDB();
 
 module.exports = (app) => {
     //Páginas
@@ -75,6 +75,9 @@ module.exports = (app) => {
             console.error('CATCH:', e);
         }
         await mail.sendEmail(req.body.email,req.body.first_name,req.body.nua, `${req.body.day} a las ${req.body.hour}`);
+        await db.collection('stats').doc('dbStats').update({
+            'usersRegistered': dbConfig.FieldValue.increment(1)
+        });
         res.redirect(`registrado?nua=${req.body.nua}`);
     });
 
