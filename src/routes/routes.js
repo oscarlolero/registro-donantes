@@ -1,6 +1,7 @@
-const config = require('../config/sgMail');
-const db = config.db;
-//config.cleanAndPopulateDB(db);
+const dbConfig = require('../config/db');
+const mail = require('../config/mail');
+const db = dbConfig.db;
+// config.cleanAndPopulateDB(db);
 
 module.exports = (app) => {
     //Páginas
@@ -73,6 +74,7 @@ module.exports = (app) => {
             res.redirect('registrado');
             console.error('CATCH:', e);
         }
+        await mail.sendEmail(req.body.email,req.body.first_name,req.body.nua, `${req.body.day} a las ${req.body.hour}`);
         res.redirect(`registrado?nua=${req.body.nua}`);
     });
 

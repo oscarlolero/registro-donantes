@@ -4,8 +4,7 @@ const serviceAccount = require("./firebase-key.json");
 admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
 });
-const db = admin.firestore();
-exports.db;
+exports.db = admin.firestore();
 //Crear registros en base de datos
 //CONFIG DATES
 exports.cleanAndPopulateDB = () => {
