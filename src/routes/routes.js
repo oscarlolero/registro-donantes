@@ -66,7 +66,7 @@ module.exports = (app) => {
                 date: day,
                 hour: req.body.hour,
                 career: req.body.career,
-                ip: ip,
+                ip: typeof ip.split(':')[3] === 'undefined' ? ip : ip.split(':')[3],
                 assist: false
             });
         } catch (e) {

@@ -1,11 +1,11 @@
 const express = require('express');
 const app = express();
 
-const path = require('path'); //manejar rutas/direcciones del servidor
+const path = require('path');
 const flash = require('connect-flash');
-const morgan = require('morgan'); //logeo de peticiones http
+const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
-const bodyParser = require('body-parser'); //procesar información desde el navegador al servidor
+const bodyParser = require('body-parser');
 const session = require('express-session');
 
 //Configuraciones
@@ -13,7 +13,6 @@ app.set('port', process.env.PORT || 3000);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs'); //Configurar motor de plantillas
 
-//Configurar y probar conexión a base de datos..
 //middlewares
 app.use(morgan('dev')); //Logeo de peticiones al servidor
 app.use(cookieParser());
@@ -37,5 +36,5 @@ app.use((req, res) => {
 });
 
 app.listen(app.get('port'), () => {
-    console.log('Server encendido en puerto', app.get('port'));
+    console.log('Server on port', app.get('port'));
 });
