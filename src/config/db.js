@@ -7,8 +7,23 @@ exports.db = admin.firestore();
 exports.FieldValue = admin.firestore.FieldValue;
 const db = admin.firestore();
 
+//Pasar lista
+exports.getAssistace = async () => {
+    const assistance = {
+        assist: [],
+        noAssist: []
+    };
+    const data = await db.collection('users').get();
+    await data.docs.forEach(doc => {
+        if (doc.data().assist === true) {
+            assistance.assist.push(`${doc.id}: ${doc.data().first_name} ${doc.data().last_name}`);
+        } else {
+            assistance.noAssist.push(`${doc.id}: ${doc.data().first_name} ${doc.data().last_name}`);
+        }
+    });
+    return assistance;
+};
 //Crear registros en base de datos
-//CONFIG DATES
 exports.cleanAndPopulateDB = () => {
     db.collection('dates').doc('availableHours').set({
         '20 de septiembre': ['8:00 a.m.', '8:20 a.m.', '8:40 a.m.',
@@ -23,7 +38,7 @@ exports.cleanAndPopulateDB = () => {
             '12:00 p.m.', '12:20 p.m.', '12:40 p.m.']
     });
     db.collection('stats').doc('dbStats').set({
-       usersRegistered: 0
+        usersRegistered: 0
     });
     db.doc('dates/20 de septiembre').collection('8:00 a.m.').doc('additionalInfo').set({additionalInfo: ''});
     db.doc('dates/20 de septiembre').collection('8:20 a.m.').doc('additionalInfo').set({additionalInfo: ''});

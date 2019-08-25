@@ -92,4 +92,18 @@ module.exports = (app) => {
             res.json(doc.data());
         });
     });
+
+    app.get('/getassistance', async (req, res) => {
+        const assistanceList = await dbConfig.getAssistace();
+        //res.send(assistanceList);
+        let text = 'Asistieron: \n\r';
+        assistanceList.assist.forEach(user => {
+            text = text.concat(`\t${user}\n\r`)
+        });
+        text = text.concat('No han asistido o no asistieron: \n\r');
+        assistanceList.noAssist.forEach(user => {
+            text = text.concat(`\t${user}\n\r`)
+        });
+        res.send(text);
+    });
 };
