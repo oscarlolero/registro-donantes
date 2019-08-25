@@ -16,7 +16,7 @@ exports.sendEmail = async (recipient, alias, NUA, date) => {
     const QRCode64 = await QRCode.toDataURL(NUA);
     const message = {
         from: 'no-reply@donantes-sangre.ugto.mx', // Sender address
-        to: 'oscmcojc1@live.com.mx',         // List of recipients
+        to: recipient,         // List of recipients
         subject: 'Confirmación de tu cita', // Subject line
         html: `¡Hola ${alias}!, tu cita quedó agendada para el ${date}.<br>Recuerda mostrar el siguiente código QR a la hora de presentarte y terminar tu cita: <br><img style=display:block; width:100px;height:100px; src="${QRCode64}" />`
     };
