@@ -1,46 +1,74 @@
 <!doctype html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Registro</title>
-    <style>
-        .register-form * {
-            display: block;
-            margin-bottom: 10px;
-        }
-    </style>
+    <meta name="description" content="Registro para los donadores de sangre.">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
 </head>
 <body>
-<form class="register-form" action="/register" method="POST">
-    <% if( typeof registerMsg != "undefined") { %>
-        <% if(registerMsg.length > 0) { %>
-            <span><%= registerMsg %></span>
-        <% } %>
-    <% } %>
-    <input type="number" name="nua" placeholder="NUA" autocomplete="off" autofocus required>
-    <input type="text" name="first_name" placeholder="Nombre" autocomplete="off" required minlength=3>
-    <input type="text" name="last_name" placeholder="Apellido" autocomplete="off" required minlength=3>
-    <input type="email" name="email" placeholder="E-mail" autocomplete="off">
-    <select name="career">
-        <option value="Artes digitales">Artes digitales</option>
-        <option value="Ingeniería en comunicaciones y electrónica">Ingeniería en comunicaciones y electrónica</option>
-        <option value="Ingeniería eléctrica">Ingeniería eléctrica</option>
-        <option value="Gestión empresarial">Gestión empresarial</option>
-        <option value="Ingeniería en mecatrónica">Ingeniería en mecatrónica</option>
-        <option value="Ingeniería en sistemas computacionales">Ingeniería en sistemas computacionales</option>
-        <option value="Doctorado/Maestría">Doctorado/Maestría</option>
-        <option value="Otro">Otro</option>
-    </select>
-    <select name="day" class="day" id="day">
-    </select>
-    <select name="hour" class="hour" style="visibility:hidden;" disabled>
-    </select>
-    <span>Puedes agregar un modal para que el usuario valide sus datos de nuevo para que este bien seguro de lo que introdujo</span>
-    <button>Registrar</button>
-</form>
+        <div class="container">
+                <div class="row">
+                    <div class="col-md-10 offset=md-1">
+                        <div class="row">
+                            <div class="col-md-5 register-left">
+                                <img src="ugto.png">
+                                <h3>Donadores de Sangre</h3>
+                            </div>
+                            <div class="col-md-7 register-right">
+                                <div class="register-form">
+                                        <form class="register-form" action="/register" method="POST">
+                                            <% if( typeof registerMsg != "undefined") { %>
+                                                <% if(registerMsg.length > 0) { %>
+                                                    <span><%= registerMsg %></span>
+                                                <% } %>
+                                            <% } %>
+                                            <div class="form-group">
+                                                    <input type="number" class="form-control" name="nua" placeholder="NUA" autocomplete="off" autofocus required>
+                                                </div>
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" placeholder="Nombre(s)" name="first_name" autocomplete="off" required minlength=3>
+                                                </div>
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" placeholder="Apellidos" name="last_name" autocomplete="off" required minlength=3>
+                                                </div>
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" placeholder="Correo Electrónico" name="email" autocomplete="off">
+                                                </div>
+                                                <div class="form-group">
+                                                    <select name="career" class="custom-select custom-select-sm">
+                                                        <option selected>Licenciatura...</option>
+                                                        <option value="Artes digitales">Artes Digitales</option>
+                                                        <option value="Gestión empresarial">Gestión Empresarial</option>
+                                                        <option value="Ingeniería en comunicaciones y electrónica">Ingeniería en Comunicaciones y Electrónica</option>
+                                                        <option value="Ingeniería eléctrica">Ingeniería Eléctrica</option>
+                                                        <option value="Ingeniería en mecatrónica">Ingeniería en Mecatrónica</option>
+                                                        <option value="Ingeniería en sistemas computacionales">Ingeniería en Sistemas Computacionales</option>
+                                                        <option value="Doctorado/Maestría">Maestría / Doctorado</option>
+                                                        <option value="Otro">Otro</option>
+                                                      </select>
+                                                </div>
+                                                <div class="form-group">
+                                                    <select name="day" class="day" id="day">
+                                                    </select>
+                                                </div>
+                                                <div class="form-group">
+                                                    <select name="hour" class="hour" style="visibility:hidden;" disabled>
+                                                    </select>
+                                                </div>
+                                                <button type="button" class="btn btn-primary">Registrarse</button>
+                                        </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
 </body>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script>

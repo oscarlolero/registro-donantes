@@ -1,2 +1,7 @@
 /node_modules
 .idea/
+src/config/.DS_Store
+src/.DS_Store
+src/public/.DS_Store
+src/config/firebase-key.json
+src/config/sendgrid-key.json
