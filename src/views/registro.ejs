@@ -16,17 +16,12 @@
                     <div class="col-md-10 offset=md-1">
                         <div class="row">
                             <div class="col-md-5 register-left">
-                                <img src="ugto.png" class="centerImage">
+                                <img src="ugto.png">
                                 <h3>Donadores de Sangre</h3>
-                                <p><b>Desarrolladores:</b></p>
-                                <ul>
-                                    <li>Oscar Montes Camberos</li>
-                                    <li>Jorge Octavio Prieto Razo</li>
-                                    <li>Diego Padilla Quijas</li>
-                                </ul>
                             </div>
                             <div class="col-md-7 register-right">
-                                <div>
+                                <div class="register-form">
+                                        <h2>Información del Donador</h2>
                                         <form class="register-form" action="/register" method="POST">
                                             <% if( typeof registerMsg != "undefined") { %>
                                                 <% if(registerMsg.length > 0) { %>
@@ -69,6 +64,14 @@
                                                 <button type="submit" value=" Send" class="btn btn-primary">Registrarse</button>
                                         </form>
                                 </div>
+                                <br>
+                                <br>
+                                <p><b>Desarrolladores:</b></p>
+                                <ul>
+                                    <li>Oscar Montes Camberos</li>
+                                    <li>Jorge Octavio Prieto Razo</li>
+                                    <li>Diego Padilla Quijas</li>
+                                </ul>
                             </div>
                         </div>
                     </div>
