@@ -32,7 +32,7 @@ module.exports = (app) => {
             const userDoc = db.collection('users').doc(req.body.nua);
             //Verificar que las entradas son válidas
             if (req.body.nua.length !== 6) {
-                req.flash('registerMsg', 'NUA inválido, deben de ser 6 números.');
+                req.flash('registerMsg', 'NUA inválido, deben de ser 6 digitos.');
                 return res.redirect('/registro');
             } else if(req.body.first_name.length < 3 || req.body.last_name.length < 3) {
                 req.flash('registerMsg', 'El nombre y apellido deben contener al menos 3 letras.');

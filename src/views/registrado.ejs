@@ -8,7 +8,8 @@
     <title>Registrado</title>
     <meta name="description" content="Registro para los donadores de sangre.">
     <link href="https://fonts.googleapis.com/css?family=Lato:100,300,300i,400" rel="stylesheet">
-
+    <link rel="shortcut icon" type="image/png" href="/favicon.ico"/>
+    <link rel="stylesheet" href="css/animate.css">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
 
@@ -18,7 +19,7 @@
                 <div class="row">
                     <div class="col-md-10 offset=md-1">
                         <div class="row">
-                            <div class="col-md-5 register-left">
+                            <div class="col-md-5 register-left animated fadeInLeft">
                                 <img src="ugto.png">
                                 <h3 class="mb-3">Donadores de Sangre</h3>
                             </div>
@@ -30,7 +31,7 @@
                                         <li>Te hemos enviado un correo a <b><%= data.email %></b> con los datos de tu cita con el <b>código QR</b> para la validación de tu donación de sangre.</li>
                                         <li>Revisa tu carpeta de <b>no deseados/spam</b> en caso de no encontrar el correo.</li>
                                         <li>Tu código QR (NUA: <span id="NUA"><%= NUA %></span>):</li>
-                                        <li style="text-align: center; margin: 0"><div id="qrcode" style="display: inline-block; width: 180px; height: 180px; margin-bottom: 10px;"></div></li>
+                                        <li class="animated rubberBand" style="text-align: center; margin: 0"><div id="qrcode" style="display: inline-block; width: 180px; height: 180px; margin-bottom: 10px;"></div></li>
                                     </ul>
 
                                     <br>

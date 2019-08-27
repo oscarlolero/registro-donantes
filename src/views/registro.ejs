@@ -7,7 +7,9 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Registro</title>
     <meta name="description" content="Registro para los donadores de sangre.">
+    <link rel="shortcut icon" type="image/png" href="/favicon.ico"/>
     <link href="https://fonts.googleapis.com/css?family=Lato:100,300,300i,400" rel="stylesheet">
+    <link rel="stylesheet" href="css/animate.css">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
@@ -16,7 +18,7 @@
     <div class="row">
         <div class="col-md-10 offset=md-1">
             <div class="row">
-                <div class="col-md-5 register-left">
+                <div class="col-md-5 register-left animated fadeInLeft">
                     <img src="ugto.png">
                     <h3 class="mb-3">Donadores de Sangre</h3>
                 </div>
@@ -26,7 +28,12 @@
                         <form class="register-form" action="/register" method="POST">
                             <% if( typeof registerMsg != "undefined") { %>
                                 <% if(registerMsg.length > 0) { %>
-                                    <span><%= registerMsg %></span>
+                                    <div class="alert alert-danger alert-dismissible fade show animated pulse" role="alert">
+                                        <strong>Error:</strong> <%= registerMsg %>
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
                                 <% } %>
                             <% } %>
                             <div class="form-group" style="margin-top: 30px">
