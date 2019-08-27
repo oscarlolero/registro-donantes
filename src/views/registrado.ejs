@@ -7,35 +7,42 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Registrado</title>
     <meta name="description" content="Registro para los donadores de sangre.">
-    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Lato:100,300,300i,400" rel="stylesheet">
+
     <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+
 </head>
-<body>
+<body style="font-family: 'Lato','Arial', sans-serif">
         <div class="container">
                 <div class="row">
                     <div class="col-md-10 offset=md-1">
                         <div class="row">
                             <div class="col-md-5 register-left">
                                 <img src="ugto.png">
-                                <h3>Donadores de Sangre</h3>
+                                <h3 class="mb-3">Donadores de Sangre</h3>
                             </div>
                             <div class="col-md-7 register-right">
-                                <div class="register-form">
-                                    <h2>¡Registro Éxitoso!</h2>
+                                <div class="title-form">
+                                    <h2>¡Registro exitoso!</h2>
                                     <ul>
-                                        <li>Hola <%= data.first_name %>, tu cita quedó agendada para el <%= data.date %> a las <%= data.hour %></li>
-                                        <li>Te enviamos un correo a <%= data.email %> con los datos de tu cita y el código QR para la validación de tu donación de sangre.</li>
-                                        <li>Revisa tu carpeta de No deseados / Spam.</li>
-                                        <li>Código QR (NUA: <span id="NUA"><%= NUA %></span>):</li>
-                                        <li><div id="qrcode" style="width: 160px; height: 150px; margin-bottom: 10px"></div></li>
+                                        <li>¡Listo <%= data.first_name %>! Tu cita quedó agendada para el <b><%= data.date %> a las <%= data.hour %></b>.</li>
+                                        <li>Te hemos enviado un correo a <b><%= data.email %></b> con los datos de tu cita con el <b>código QR</b> para la validación de tu donación de sangre.</li>
+                                        <li>Revisa tu carpeta de <b>no deseados/spam</b> en caso de no encontrar el correo.</li>
+                                        <li>Tu código QR (NUA: <span id="NUA"><%= NUA %></span>):</li>
+                                        <li style="text-align: center; margin: 0"><div id="qrcode" style="display: inline-block; width: 180px; height: 180px; margin-bottom: 10px;"></div></li>
                                     </ul>
 
                                     <br>
-                                    <p class="centerText"><b>Desarrolladores</b></p>
-                                    <p class="centerText">Oscar Montes Camberos<br>
-                                        Jorge Octavio Prieto Razo<br>
-                                        Diego Padilla Quijas
-                                    </p>
+                                    <p class="centerText" style="font-size: 20px;"><b>Desarrolladores</b></p>
+                                    <div class="centerText" style="margin-bottom: 20px">
+                                        <a href="https://www.facebook.com/oscar.lolero" target="_blank">Oscar Montes Camberos</a>
+                                        <br>
+                                        <a href="https://www.facebook.com/SoyJorgeRazo" target="_blank">Jorge Octavio Prieto Razo</a>
+                                        <br>
+                                        <a href="https://www.facebook.com/JacquesPa" target="_blank">Diego Padilla Quijas</a>
+                                        <br>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -47,8 +54,8 @@
 <script src="js/qrcode.min.js"></script>
 <script>
     let qrcode = new QRCode('qrcode', {
-        width: 160,
-        height: 160,
+        width: 180,
+        height: 180,
         colorDark : "#000000",
         colorLight : "#ffffff",
     });
