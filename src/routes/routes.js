@@ -25,7 +25,6 @@ module.exports = (app) => {
     });
     //Validaciones y registros
     app.post('/register', async (req, res) => {
-        console.log(req.body);
         try {
             let data;
             const day = req.body.day;
