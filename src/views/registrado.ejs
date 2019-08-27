@@ -27,9 +27,10 @@
                                 <div class="title-form">
                                     <h2>¡Registro exitoso!</h2>
                                     <ul>
-                                        <li>¡Listo <%= data.first_name %>! Tu cita quedó agendada para el <b><%= data.date %> a las <%= data.hour %></b>.</li>
+                                        <li>¡Listo <%= data.first_name %>! Tu cita quedó agendada para el <b><%= data.date %> a las <%= data.hour %></b></li>
                                         <li>Te hemos enviado un correo a <b><%= data.email %></b> con los datos de tu cita con el <b>código QR</b> para la validación de tu donación de sangre.</li>
                                         <li>Revisa tu carpeta de <b>no deseados/spam</b> en caso de no encontrar el correo.</li>
+                                        <li>Te recomendamos leer antes esta información días antes de ir a tu cita: <a href="http://www.donarsangre.org/informacion-basica-para-donantes/" target="_blank">haz click aquí.</a></li>
                                         <li>Tu código QR (NUA: <span id="NUA"><%= NUA %></span>):</li>
                                         <li class="animated rubberBand" style="text-align: center; margin: 0"><div id="qrcode" style="display: inline-block; width: 180px; height: 180px; margin-bottom: 10px;"></div></li>
                                     </ul>
