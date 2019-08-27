@@ -1,20 +1,31 @@
 body{
-    background-image: linear-gradient(to right, #FF5722, #FF9800);
+    animation: move 5s ease infinite;
+    transform: translate3d(0, 0, 0);
+    background: linear-gradient(to right, #FF5722 20%, #FF9800 80%);
+    background-size: 400% 400%;
     margin-top: 50px !important;
 }
+@keyframes move {
+    0% {
+        background-position: 0 0
+    }
 
+    50% {
+        background-position: 100% 0
+    }
+
+    100% {
+        background-position: 0 0
+    }
+}
 .register-left{
     color: #fff;
     padding: 10px;
 }
 .register-left img{
-    margin-top: 117px;
-    margin-bottom: 18px;
     width: 300px;
-
     display: block;
-    margin-left: auto;
-    margin-right: auto;
+    margin: 117px auto 18px;
 }
 .register-left p{
     padding: 20px 20px 0;
@@ -23,27 +34,23 @@ body{
 .register-right{
     border: none;
     background: #f8f8f8;
-    border-top-left-radius: 5%;
-    border-top-right-radius: 5%;
-    padding:  10px;
+    border-radius: 20px;
 }
 
 .register-right h2{
     text-align: center;
     margin-bottom: 10px;
     color: #555;
-
 }
 
 .register-form{
-    padding: 40px;
+    padding: 50px 25px 10px 25px;
 }
 
 .register-right .btn-primary{
-    float: right;
     border-radius: 1.5rem;
     border: none;
-    width: 120px;
+    width: 300px;
     background: #ff9800;
     font-weight: 600;
     color: #fff;
@@ -55,7 +62,7 @@ body{
     background: #ff5722;
 }
 
-h3{
+h3 , p{
     text-align: center;
 }
 

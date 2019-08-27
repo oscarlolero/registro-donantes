@@ -11,75 +11,84 @@
     <link rel="stylesheet" href="css/bootstrap.min.css">
 </head>
 <body>
-        <div class="container">
-                <div class="row">
-                    <div class="col-md-10 offset=md-1">
-                        <div class="row">
-                            <div class="col-md-5 register-left">
-                                <img src="ugto.png">
-                                <h3>Donadores de Sangre</h3>
+<div class="container">
+    <div class="row">
+        <div class="col-md-10 offset=md-1">
+            <div class="row">
+                <div class="col-md-5 register-left">
+                    <img src="ugto.png">
+                    <h3>Donadores de Sangre</h3>
+                </div>
+                <div class="col-md-7 register-right">
+                    <div class="register-form">
+                        <h2>Información del donador</h2>
+                        <p>¡Hola! Ingresa tus datos a continuación para continuar.</p>
+                        <form class="register-form" action="/register" method="POST">
+                            <% if( typeof registerMsg != "undefined") { %>
+                                <% if(registerMsg.length > 0) { %>
+                                    <span><%= registerMsg %></span>
+                                <% } %>
+                            <% } %>
+                            <div class="form-group">
+                                <input type="number" class="form-control" name="nua" placeholder="NUA" maxlength="6"
+                                       autocomplete="off" autofocus required>
                             </div>
-                            <div class="col-md-7 register-right">
-                                <div class="register-form">
-                                        <h2>Información del Donador</h2>
-                                        <form class="register-form" action="/register" method="POST">
-                                            <% if( typeof registerMsg != "undefined") { %>
-                                                <% if(registerMsg.length > 0) { %>
-                                                    <span><%= registerMsg %></span>
-                                                <% } %>
-                                            <% } %>
-                                            <div class="form-group">
-                                                    <input type="number" class="form-control" name="nua" placeholder="NUA" maxlength="6" autocomplete="off" autofocus required >
-                                                </div>
-                                                <div class="form-group">
-                                                    <input type="text" class="form-control" placeholder="Nombre(s)" name="first_name" autocomplete="off" required minlength=3>
-                                                </div>
-                                                <div class="form-group">
-                                                    <input type="text" class="form-control" placeholder="Apellidos" name="last_name" autocomplete="off" required minlength=3>
-                                                </div>
-                                                <div class="form-group">
-                                                    <input type="text" class="form-control" placeholder="Correo Electrónico" name="email" autocomplete="off">
-                                                </div>
-                                                <div class="form-group">
-                                                    <select name="career" class="form-control">
-                                                        <option selected>Licenciatura...</option>
-                                                        <option value="Artes digitales">Artes Digitales</option>
-                                                        <option value="Gestión empresarial">Gestión Empresarial</option>
-                                                        <option value="Ingeniería en comunicaciones y electrónica">Ingeniería en Comunicaciones y Electrónica</option>
-                                                        <option value="Ingeniería eléctrica">Ingeniería Eléctrica</option>
-                                                        <option value="Ingeniería en mecatrónica">Ingeniería en Mecatrónica</option>
-                                                        <option value="Ingeniería en sistemas computacionales">Ingeniería en Sistemas Computacionales</option>
-                                                        <option value="Doctorado/Maestría">Maestría / Doctorado</option>
-                                                        <option value="Otro">Otro</option>
-                                                      </select>
-                                                </div>
-                                                <div class="form-group">
-                                                    <select name="day" class="day form-control" id="day">
-                                                    </select>
-                                                </div>
-                                                <div class="form-group">
-                                                    <select name="hour" class="hour form-control" style="visibility:hidden;" disabled>
-                                                    </select>
-                                                </div>
-                                                <button type="submit" value=" Send" class="btn btn-primary">Registrarse</button>
-
-                                                <br>
-                                                <br>
-                                                <br>
-                                                <br>
-                                                <br>
-                                                <p class="centerText"><b>Desarrolladores</b></p>
-                                                <p class="centerText">Oscar Montes Camberos<br>
-                                                    Jorge Octavio Prieto Razo<br>
-                                                    Diego Padilla Quijas
-                                                </p>
-                                        </form>
-                                </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Nombre(s)" name="first_name"
+                                       autocomplete="off" required minlength=3>
                             </div>
-                        </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Apellidos" name="last_name"
+                                       autocomplete="off" required minlength=3>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Correo Electrónico" name="email"
+                                       autocomplete="off">
+                            </div>
+                            <div class="form-group">
+                                <select name="career" class="form-control">
+                                    <option value="0" selected>Licenciatura...</option>
+                                    <option value="Artes digitales">Artes Digitales</option>
+                                    <option value="Gestión empresarial">Gestión Empresarial</option>
+                                    <option value="Ingeniería en comunicaciones y electrónica">Ingeniería en
+                                        Comunicaciones y Electrónica
+                                    </option>
+                                    <option value="Ingeniería eléctrica">Ingeniería Eléctrica</option>
+                                    <option value="Ingeniería en mecatrónica">Ingeniería en Mecatrónica</option>
+                                    <option value="Ingeniería mecánica">Ingeniería Mecánica</option>
+                                    <option value="Ingeniería en sistemas computacionales">Ingeniería en Sistemas
+                                        Computacionales
+                                    </option>
+                                    <option value="Doctorado/Maestría">Maestría / Doctorado</option>
+                                    <option value="Otro">Otro</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <select name="day" class="day form-control" id="day">
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <select name="hour" class="hour form-control" disabled>
+                                    <option value="0">Selecciona un día.</option>
+                                </select>
+                            </div>
+                            <div class="form-group" style="text-align: center">
+                                <button type="submit" value=" Send" class="btn btn-primary">Registrarse</button>
+                            </div>
+                            <br>
+                            <br>
+                            <p class="centerText"><b>Desarrolladores</b></p>
+                            <p class="centerText">Oscar Montes Camberos<br>
+                                Jorge Octavio Prieto Razo<br>
+                                Diego Padilla Quijas
+                            </p>
+                        </form>
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+</div>
 
 </body>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>

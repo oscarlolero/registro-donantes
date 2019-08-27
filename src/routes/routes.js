@@ -25,14 +25,29 @@ module.exports = (app) => {
     });
     //Validaciones y registros
     app.post('/register', async (req, res) => {
+        console.log(req.body);
         try {
             let data;
             const day = req.body.day;
             const userDoc = db.collection('users').doc(req.body.nua);
             //Verificar que las entradas son válidas
-            if (req.body.nua.length !== 6 || req.body.first_name.length < 3 || req.body.last_name.length < 3
-                || req.body.email < 4 || req.body.hour === 0 || req.body.day === 0 || typeof req.body.hour === 'undefined') {
-                req.flash('registerMsg', 'Verifica que has ingresado todos los datos de manera correcta.');
+            if (req.body.nua.length !== 6) {
+                req.flash('registerMsg', 'NUA inválido, deben de ser 6 números.');
+                return res.redirect('/registro');
+            } else if(req.body.first_name.length < 3 || req.body.last_name.length < 3) {
+                req.flash('registerMsg', 'El nombre y apellido deben contener al menos 3 letras.');
+                return res.redirect('/registro');
+            } else if(req.body.career === '0') {
+                req.flash('registerMsg', 'Selecciona una carrera.');
+                return res.redirect('/registro');
+            } else if(req.body.email < 4) {
+                req.flash('registerMsg', 'Correo inválido.');
+                return res.redirect('/registro');
+            } else if(req.body.day === '0') {
+                req.flash('registerMsg', 'Selecciona un día.');
+                return res.redirect('/registro');
+            } else if(req.body.hour === '0') {
+                req.flash('registerMsg', 'Selecciona un horario.');
                 return res.redirect('/registro');
             }
             //Checar si el NUA existe
