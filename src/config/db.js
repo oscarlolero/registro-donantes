@@ -58,19 +58,19 @@ exports.cleanAndPopulateDB = () => {
     db.doc('dates/3 de septiembre').set({exists: true});
     //4 de septiembre
     db.doc('dates/4 de septiembre').collection('8:00 a.m.').doc('additionalInfo').set({additionalInfo: ''});
-    db.doc('dates/4 de septiembre').collection('8:21 a.m.').doc('additionalInfo').set({additionalInfo: ''});
+    db.doc('dates/4 de septiembre').collection('8:20 a.m.').doc('additionalInfo').set({additionalInfo: ''});
     db.doc('dates/4 de septiembre').collection('8:40 a.m.').doc('additionalInfo').set({additionalInfo: ''});
     db.doc('dates/4 de septiembre').collection('9:00 a.m.').doc('additionalInfo').set({additionalInfo: ''});
-    db.doc('dates/4 de septiembre').collection('9:21 a.m.').doc('additionalInfo').set({additionalInfo: ''});
+    db.doc('dates/4 de septiembre').collection('9:20 a.m.').doc('additionalInfo').set({additionalInfo: ''});
     db.doc('dates/4 de septiembre').collection('9:40 a.m.').doc('additionalInfo').set({additionalInfo: ''});
     db.doc('dates/4 de septiembre').collection('10:00 a.m.').doc('additionalInfo').set({additionalInfo: ''});
-    db.doc('dates/4 de septiembre').collection('10:21 a.m.').doc('additionalInfo').set({additionalInfo: ''});
+    db.doc('dates/4 de septiembre').collection('10:20 a.m.').doc('additionalInfo').set({additionalInfo: ''});
     db.doc('dates/4 de septiembre').collection('10:40 a.m.').doc('additionalInfo').set({additionalInfo: ''});
     db.doc('dates/4 de septiembre').collection('11:00 a.m.').doc('additionalInfo').set({additionalInfo: ''});
-    db.doc('dates/4 de septiembre').collection('11:21 a.m.').doc('additionalInfo').set({additionalInfo: ''});
+    db.doc('dates/4 de septiembre').collection('11:20 a.m.').doc('additionalInfo').set({additionalInfo: ''});
     db.doc('dates/4 de septiembre').collection('11:40 a.m.').doc('additionalInfo').set({additionalInfo: ''});
     db.doc('dates/4 de septiembre').collection('12:00 p.m.').doc('additionalInfo').set({additionalInfo: ''});
-    db.doc('dates/4 de septiembre').collection('12:21 p.m.').doc('additionalInfo').set({additionalInfo: ''});
+    db.doc('dates/4 de septiembre').collection('12:20 p.m.').doc('additionalInfo').set({additionalInfo: ''});
     db.doc('dates/4 de septiembre').collection('12:40 p.m.').doc('additionalInfo').set({additionalInfo: ''});
     db.doc('dates/4 de septiembre').set({exists: true});
 };
