@@ -7,8 +7,10 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Registro</title>
     <meta name="description" content="Registro para los donadores de sangre.">
-    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Lato:100,300,300i,400" rel="stylesheet">
+
     <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 <div class="container">
@@ -20,15 +22,17 @@
                     <h3>Donadores de Sangre</h3>
                 </div>
                 <div class="col-md-7 register-right">
-                    <div class="register-form">
+                    <div class="title-form">
                         <h2>Información del donador</h2>
-                        <p>¡Hola! Ingresa tus datos a continuación para continuar.</p>
                         <form class="register-form" action="/register" method="POST">
                             <% if( typeof registerMsg != "undefined") { %>
                                 <% if(registerMsg.length > 0) { %>
                                     <span><%= registerMsg %></span>
                                 <% } %>
                             <% } %>
+                            <div class="form-group" style="margin-top: 30px">
+                                <span>Completa los siguientes campos:</span>
+                            </div>
                             <div class="form-group">
                                 <input type="number" class="form-control" name="nua" placeholder="NUA" maxlength="6"
                                        autocomplete="off" autofocus required>
@@ -47,7 +51,7 @@
                             </div>
                             <div class="form-group">
                                 <select name="career" class="form-control">
-                                    <option value="0" selected>Licenciatura...</option>
+                                    <option value="0" selected>Selecciona una licenciatura...</option>
                                     <option value="Artes digitales">Artes Digitales</option>
                                     <option value="Gestión empresarial">Gestión Empresarial</option>
                                     <option value="Ingeniería en comunicaciones y electrónica">Ingeniería en
@@ -63,12 +67,15 @@
                                     <option value="Otro">Otro</option>
                                 </select>
                             </div>
+                            <div class="form-group" style="margin-top: 30px">
+                                <span>Selecciona un día y horario:</span>
+                            </div>
                             <div class="form-group">
                                 <select name="day" class="day form-control" id="day">
                                 </select>
                             </div>
                             <div class="form-group">
-                                <select name="hour" class="hour form-control" disabled>
+                                <select name="hour" class="hour form-control" disabled style="visibility: hidden;">
                                     <option value="0">Selecciona un día.</option>
                                 </select>
                             </div>
@@ -77,11 +84,15 @@
                             </div>
                             <br>
                             <br>
-                            <p class="centerText"><b>Desarrolladores</b></p>
-                            <p class="centerText">Oscar Montes Camberos<br>
-                                Jorge Octavio Prieto Razo<br>
-                                Diego Padilla Quijas
-                            </p>
+                            <p class="centerText" style="font-size: 20px;"><b>Desarrolladores</b></p>
+                            <div class="centerText">
+                                <a href="#">Oscar Montes Camberos</a>
+                                <br>
+                                <a href="#">Jorge Octavio Prieto Razo</a>
+                                <br>
+                                <a href="#">Diego Padilla Quijas</a>
+                                <br>
+                            </div>
                         </form>
                     </div>
                 </div>

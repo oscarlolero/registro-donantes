@@ -1,9 +1,10 @@
-body{
+html, body {
+    font-family: 'Lato','Arial', sans-serif;
     animation: move 5s ease infinite;
     transform: translate3d(0, 0, 0);
     background: linear-gradient(to right, #FF5722 20%, #FF9800 80%);
     background-size: 400% 400%;
-    margin-top: 50px !important;
+    margin-top: 20px !important;
 }
 @keyframes move {
     0% {
@@ -41,16 +42,20 @@ body{
     text-align: center;
     margin-bottom: 10px;
     color: #555;
+    letter-spacing: 1px;
 }
-
-.register-form{
+.title-form {
     padding: 50px 25px 10px 25px;
+}
+.register-form {
+    padding: 0 13px 10px 13px;
 }
 
 .register-right .btn-primary{
+    letter-spacing: 1px;
     border-radius: 1.5rem;
     border: none;
-    width: 300px;
+    width: 270px;
     background: #ff9800;
     font-weight: 600;
     color: #fff;
@@ -63,6 +68,8 @@ body{
 }
 
 h3 , p{
+    letter-spacing: 2px;
+    font-weight: 300;
     text-align: center;
 }
 
@@ -75,3 +82,21 @@ li{
     text-align: center;
 }
 
+.centerText a {
+    margin-bottom: 30px;
+}
+
+a:link,
+a:visited {
+    color: #ff7f50;
+    text-decoration: none;
+    border-bottom: 1px solid #ff7f50;
+    -webkit-transition: border-bottom 0.2s, color 0.2s;
+    transition: border-bottom 0.2s, color 0.2s;
+}
+
+a:hover,
+a:active {
+    color: #555;
+    border-bottom: 1px solid transparent;
+}
