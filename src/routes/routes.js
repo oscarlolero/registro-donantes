@@ -95,14 +95,22 @@ module.exports = (app) => {
     });
 
     //Consultas
-    app.get('/hours', (req, res) => {
-        db.collection(`dates`).doc('availableHours').get().then(hoursList => {
-            res.json(hoursList.data());
-        });
-    });
     app.get('/days', (req, res) => {
         db.collection('dates').doc('availableHours').get().then(doc => {
-            res.json(doc.data());
+            const keys =[], ordered = {};
+            let k, i, len;
+            for (k in doc.data()) {
+                if (doc.data().hasOwnProperty(k)) {
+                    keys.push(k);
+                }
+            }
+            keys.sort();
+            len = keys.length;
+            for (i = 0; i < len; i++) {
+                k = keys[i];
+                ordered[k] =  doc.data()[k]
+            }
+            res.json(ordered);
         });
     });
 

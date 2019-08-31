@@ -125,7 +125,7 @@
         if (daySelect.value !== '0') {
             hourSelect.style.visibility = "visible";
             hourSelect.innerHTML = '<option value="0">Cargando horarios...</option>';
-            const response = await axios.get(`${window.origin}/hours`);
+            const response = await axios.get(`${window.origin}/days`);
             hourSelect.innerHTML = '<option value="0">Seleccione un horario...</option>';
             Object.entries(response.data)[daySelect.selectedIndex - 1][1].forEach(hour => {
                 hourSelect.insertAdjacentHTML('beforeend', `<option value="${hour}">${hour}</option>`)
