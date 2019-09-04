@@ -1,7 +1,6 @@
 const dbConfig = require('../config/db');
 const mail = require('../config/mail');
 const db = dbConfig.db;
-//dbConfig.cleanAndPopulateDB();
 
 module.exports = (app) => {
     //Páginas
@@ -83,27 +82,35 @@ module.exports = (app) => {
                 ip: typeof ip.split(':')[3] === 'undefined' ? ip : ip.split(':')[3],
                 assist: false
             });
+            await mail.sendEmail(req.body.email,req.body.first_name,req.body.nua, `${req.body.day} a las ${req.body.hour}`);
+            await db.collection('stats').doc('dbStats').update({
+                'usersRegistered': dbConfig.FieldValue.increment(1)
+            });
+            res.redirect(`registrado?nua=${req.body.nua}`);
         } catch (e) {
             req.flash('registerMsg', 'Hubo un error interno con el servidor.');
             res.redirect('registrado');
             console.error('CATCH:', e);
         }
-        await mail.sendEmail(req.body.email,req.body.first_name,req.body.nua, `${req.body.day} a las ${req.body.hour}`);
-        await db.collection('stats').doc('dbStats').update({
-            'usersRegistered': dbConfig.FieldValue.increment(1)
-        });
-        res.redirect(`registrado?nua=${req.body.nua}`);
     });
 
     //Consultas
-    app.get('/hours', (req, res) => {
-        db.collection(`dates`).doc('availableHours').get().then(hoursList => {
-            res.json(hoursList.data());
-        });
-    });
     app.get('/days', (req, res) => {
         db.collection('dates').doc('availableHours').get().then(doc => {
-            res.json(doc.data());
+            const keys =[], ordered = {};
+            let k, i, len;
+            for (k in doc.data()) {
+                if (doc.data().hasOwnProperty(k)) {
+                    keys.push(k);
+                }
+            }
+            keys.sort();
+            len = keys.length;
+            for (i = 0; i < len; i++) {
+                k = keys[i];
+                ordered[k] =  doc.data()[k]
+            }
+            res.json(ordered);
         });
     });
 
