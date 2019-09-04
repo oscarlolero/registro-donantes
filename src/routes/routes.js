@@ -120,4 +120,38 @@ module.exports = (app) => {
         });
         res.send(text);
     });
+
+    app.get('/generatepdf', async (req, res) => {
+        const assistanceList = await dbConfig.getAssistace();
+        //res.send(assistanceList);
+        let text = 'Personas que se registraron al evento de donación en DICIS el 3 y 4 de septiembre del 2019: \n\r';
+        let total = 0;
+        assistanceList.assist.forEach(user => {
+            text = text.concat(`\t${user}\n\r`)
+            total++;
+        });
+        assistanceList.noAssist.forEach(user => {
+            text = text.concat(`\t${user}\n\r`)
+            total++;
+        });
+        text = text.concat(`Total: ${total}`);
+        res.send(text);
+    });
+
+    app.get('/generateexcel', async (req, res) => {
+        const assistanceList = await dbConfig.getAssistace();
+        //res.send(assistanceList);
+        let text = 'Personas que se registraron al evento de donación en DICIS el 3 y 4 de septiembre del 2019: \n\r';
+        let total = 0;
+        assistanceList.assist.forEach(user => {
+            text = text.concat(`\t${user}\n\r`)
+            total++;
+        });
+        assistanceList.noAssist.forEach(user => {
+            text = text.concat(`\t${user}\n\r`)
+            total++;
+        });
+        text = text.concat(`Total: ${total}`);
+        res.send(text);
+    });
 };
